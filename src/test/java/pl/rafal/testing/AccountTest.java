@@ -1,6 +1,9 @@
 package pl.rafal.testing;
 import org.junit.jupiter.api.Test;
 
+//import static org.hamcrest.MatcherAssert.assertThat;
+//import static org.hamcrest.Matchers.*;
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AccountTest {
@@ -10,6 +13,12 @@ class AccountTest {
         Account newAccount = new Account();
         //then
         assertFalse(newAccount.isActive());
+        //hamcrest
+//        assertThat(newAccount.isActive(), equalTo(false));
+//        assertThat(newAccount.isActive(), is(false));
+        //assertJ
+        assertThat(newAccount.isActive()).isFalse();
+
     }
     @Test
     void newAccountShouldBeActiveAfterActivation(){
@@ -32,7 +41,10 @@ class AccountTest {
 
         //then
         assertNull(address);
-
+        //hamcrest
+//        assertThat(address,nullValue());
+        //assertj
+        assertThat(address).isNull();
         }
 
         @Test
