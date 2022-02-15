@@ -15,6 +15,10 @@ public class Cart {
         this.orders.clear();
     }
 
+    public List<Order> getOrders() {
+        return orders;
+    }
+
     void simulateLargeCart(int size){
         //Cart cart = new Cart();
         for (int i = 0; i < size; i++) {

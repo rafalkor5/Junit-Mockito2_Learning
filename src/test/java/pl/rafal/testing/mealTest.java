@@ -1,13 +1,24 @@
 package pl.rafal.testing;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.function.Executable;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.stream.Stream;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
+//@ExtendWith(BeforeAfterExtension.class)
 class mealTest {
 
     private Order order;
@@ -93,5 +104,70 @@ class mealTest {
         //when
         //then
         assertThrows(IllegalArgumentException.class,() -> meal.getDiscountedPrice(20));
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {5,10,15})
+    void mealPricesSchouldBeLowerThan20(int price){
+        assertThat(price,lessThan(20));
+    }
+
+    @ParameterizedTest
+    @MethodSource("createMealsWithNameAndPrice")
+    void burgerSchouldHaveCorrectNameAndPrice(String name,int price){
+        assertThat(name,containsString("burger"));
+        assertThat(price,greaterThanOrEqualTo(10));
+    }
+
+    private static Stream<Arguments> createMealsWithNameAndPrice(){
+        return Stream.of(
+                Arguments.of("Hamburger",10),
+                Arguments.of("Cheesburger", 12)
+        );
+    }
+    @ExtendWith(IAExepctionIgnoreExtension.class)
+    @ParameterizedTest
+    @ValueSource(ints = {5,10,15})
+    void mealPricesSchouldBeLowerThan10(int price){
+
+        if(price>5){
+            throw new IllegalArgumentException();
+        }
+
+        assertThat(price,lessThan(20));
+    }
+
+//    @TestFactory
+//    Collection<DynamicTest> dynamicTestCollection(){
+//        return Arrays.asList(
+//                dynamicTest("Dynamic test 1", ()-> assertThat(5,lessThan(6))),
+//                dynamicTest("Dynamic test 2", ()-> assertEquals(4,2*2))
+//        );
+//    }
+
+    @TestFactory
+    Collection<DynamicTest> calculateMealPrices(){
+        //dodajemy posiłki
+        order.addMealToOrder(new Meal(10,5,"BUlka"));
+        order.addMealToOrder(new Meal(15,2,"zupa"));
+        order.addMealToOrder(new Meal(20,1,"chlep"));
+        Collection<DynamicTest> dynamicTests = new ArrayList<>();
+        //petla wielkosci zamówienia
+        for (int i = 0; i <order.getMeals().size(); i++) {
+            int price = order.getMeals().get(i).getPrice();
+            int quantity = order.getMeals().get(i).getQuantity();
+            //executable z junit.jupiter.api.function
+            Executable executable = () -> assertThat(calculatePrice(price,quantity), lessThan(100));
+
+            String name = "Test name:" + i;
+            //Test dynamiczny składa sie z nazwy i działania
+            DynamicTest dynamicTest = DynamicTest.dynamicTest(name,executable);
+            dynamicTests.add(dynamicTest);
+        }
+        return dynamicTests;
+    }
+
+    private int calculatePrice(int price, int quantity){
+        return price*quantity;
     }
 }
