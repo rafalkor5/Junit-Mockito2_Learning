@@ -1,5 +1,7 @@
 package pl.rafal.testing;
 
+import java.util.Objects;
+
 public class Meal {
 
     private int price;
@@ -14,12 +16,25 @@ public class Meal {
         this.name = name;
     }
 
-    public int getPrice(){
+    int getPrice(){
         return price;
     }
 
-    public int getDiscountedPrice(int discount){
+    int getDiscountedPrice(int discount){
+
+        if(discount > this.price){
+            throw new IllegalArgumentException("This price cannot be higher then Price");
+        }
+
         return this.price -discount;
+    }
+
+    @Override
+    public String toString() {
+        return "Meal{" +
+                "price=" + price +
+                ", name='" + name + '\'' +
+                '}';
     }
 
     @Override
@@ -30,7 +45,7 @@ public class Meal {
         Meal meal = (Meal) o;
 
         if (price != meal.price) return false;
-        return name != null ? name.equals(meal.name) : meal.name == null;
+        return Objects.equals(name, meal.name);
     }
 
     @Override
