@@ -23,6 +23,9 @@ public class Meal {
         this.name = name;
     }
 
+    public Meal() {
+    }
+
     //methods
 
     public int getQuantity() {
@@ -66,5 +69,9 @@ public class Meal {
         int result = price;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
+    }
+
+    int sumPrice(){
+        return getPrice()*getQuantity();
     }
 }

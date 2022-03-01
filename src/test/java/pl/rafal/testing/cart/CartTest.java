@@ -1,8 +1,10 @@
-package pl.rafal.testing;
+package pl.rafal.testing.cart;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import pl.rafal.testing.Meal;
+import pl.rafal.testing.order.Order;
+
 import java.time.Duration;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;

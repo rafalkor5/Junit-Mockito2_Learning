@@ -1,6 +1,8 @@
-package pl.rafal.testing;
+package pl.rafal.testing.account;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
+import pl.rafal.testing.account.Account;
+import pl.rafal.testing.account.Address;
 
 //import static org.hamcrest.MatcherAssert.assertThat;
 //import static org.hamcrest.Matchers.*;

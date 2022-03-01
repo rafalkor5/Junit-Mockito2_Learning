@@ -1,10 +1,13 @@
-package pl.rafal.testing;
+package pl.rafal.testing.order;
+
+import pl.rafal.testing.Meal;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
     private List<Meal> meals = new ArrayList<>();
+    private OrderStatus orderStatus;
 
     public void addMealToOrder(Meal meal){
         this.meals.add(meal);
@@ -18,6 +21,13 @@ public class Order {
     }
     public void cancel(){
         this.meals.clear();
+    }
+
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
+    public void changeOrderStatus(OrderStatus orderStatus){
+        this.orderStatus = orderStatus;
     }
 
     @Override

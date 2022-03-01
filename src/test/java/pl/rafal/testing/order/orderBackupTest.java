@@ -1,15 +1,18 @@
-package pl.rafal.testing;
+package pl.rafal.testing.order;
 
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import pl.rafal.testing.Meal;
+import pl.rafal.testing.order.Order;
+import pl.rafal.testing.order.orderBackup;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 class orderBackupTest {
-    private static orderBackup orderBackup;
+    private static pl.rafal.testing.order.orderBackup orderBackup;
 
     @BeforeAll
     static void setup() throws FileNotFoundException {

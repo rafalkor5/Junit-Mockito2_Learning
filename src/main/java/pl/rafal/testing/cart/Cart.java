@@ -1,4 +1,7 @@
-package pl.rafal.testing;
+package pl.rafal.testing.cart;
+
+import pl.rafal.testing.Meal;
+import pl.rafal.testing.order.Order;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -7,21 +7,24 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import pl.rafal.testing.extensions.IAExepctionIgnoreExtension;
+import pl.rafal.testing.order.Order;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Stream;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.DynamicTest.dynamicTest;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 
 //@ExtendWith(BeforeAfterExtension.class)
 class mealTest {
 
-    private Order order;
+    private pl.rafal.testing.order.Order order;
     @BeforeEach
     void initializeOrder(){
         System.out.println("Hello");
@@ -169,5 +172,39 @@ class mealTest {
 
     private int calculatePrice(int price, int quantity){
         return price*quantity;
+    }
+
+    @Test
+    void testMealSumPrice(){
+        //given
+        Meal meal = mock(Meal.class);
+
+        given(meal.getPrice()).willReturn(15);
+        given(meal.getQuantity()).willReturn(3);
+        given(meal.sumPrice()).willCallRealMethod();
+        // uzycie prawdziwej metody na mocku. Bez tego zwracane będzie w przypadku typu int 0
+        //when
+        int result = meal.sumPrice();
+
+        //then
+        assertThat(result,equalTo(45));
+    }
+
+
+    @Test
+    void testMealSumPriceWithSpy(){
+        //given
+        Meal meal = spy(Meal.class);
+
+        given(meal.getPrice()).willReturn(15);
+        given(meal.getQuantity()).willReturn(3);
+
+        // uzycie prawdziwej metody na mocku. Bez tego zwracane będzie w przypadku typu int 0
+        //when
+        int result = meal.sumPrice();
+
+        //then
+
+        assertThat(result,equalTo(45));
     }
 }

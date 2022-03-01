@@ -1,4 +1,4 @@
-package pl.rafal.testing;
+package pl.rafal.testing.order;
 
 import java.io.*;
 

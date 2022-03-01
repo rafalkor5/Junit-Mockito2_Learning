@@ -1,4 +1,4 @@
-package pl.rafal.testing;
+package pl.rafal.testing.extensions;
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
