@@ -2,7 +2,7 @@ package pl.rafal.testing.cart;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pl.rafal.testing.Meal;
+import pl.rafal.testing.meal.Meal;
 import pl.rafal.testing.order.Order;
 
 import java.time.Duration;

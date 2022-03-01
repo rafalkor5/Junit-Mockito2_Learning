@@ -1,4 +1,4 @@
-package pl.rafal.testing;
+package pl.rafal.testing.meal;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;

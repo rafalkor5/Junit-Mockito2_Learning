@@ -3,9 +3,8 @@ package pl.rafal.testing.order;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import pl.rafal.testing.Meal;
+import pl.rafal.testing.meal.Meal;
 import pl.rafal.testing.extensions.BeforeAfterExtension;
-import pl.rafal.testing.order.Order;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;

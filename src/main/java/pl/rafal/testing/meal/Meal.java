@@ -1,4 +1,4 @@
-package pl.rafal.testing;
+package pl.rafal.testing.meal;
 
 import java.util.Objects;
 
@@ -34,6 +34,10 @@ public class Meal {
 
     int getPrice(){
         return price;
+    }
+
+    public String getName() {
+        return name;
     }
 
     int getDiscountedPrice(int discount){

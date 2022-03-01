@@ -1,6 +1,6 @@
 package pl.rafal.testing.order;
 
-import pl.rafal.testing.Meal;
+import pl.rafal.testing.meal.Meal;
 
 import java.util.ArrayList;
 import java.util.List;
